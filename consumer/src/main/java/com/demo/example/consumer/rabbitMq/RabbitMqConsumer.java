@@ -14,7 +14,7 @@ public class RabbitMqConsumer {
     private SimpMessagingTemplate messagingTemplate;
 
     @RabbitListener(queues = "${jsa.rabbitmq.queue}")
-    public void recievedMessage(String pictures) {
+    public void receivedMessage(String pictures) {
         Picture[] recivedPictures = new Gson().fromJson(pictures, Picture[].class);
         messagingTemplate.convertAndSend("/topic/reply/",recivedPictures);
     }

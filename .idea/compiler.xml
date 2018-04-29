@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="consumer_main" target="1.8" />
+      <module name="consumer_test" target="1.8" />
+      <module name="demo1_main" target="1.8" />
+      <module name="demo1_test" target="1.8" />
+      <module name="getter_main" target="1.8" />
+      <module name="getter_test" target="1.8" />
+      <module name="producer_main" target="1.8" />
+      <module name="producer_test" target="1.8" />
+      <module name="reciver_main" target="1.8" />
+      <module name="reciver_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

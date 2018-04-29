@@ -1,1 +1,15 @@
-<ngx-gallery [options]="galleryOptions" [images]="images"></ngx-gallery>
+<div class="body" style="display: flex; flex-direction: row">
+  <div>
+    <ul>
+      <li *ngFor="let temp of jsons">
+        id: {{temp.id}}, name:{{temp.name}}, imgUrl:{{temp.imgUrl}}, date: {{temp.createdAt}}
+      </li>
+    </ul>
+  </div>
+  <div style="    width: 500px;
+    height: 600px;
+    margin-left: 5%;
+    margin-top: 5%;">
+    <ngx-gallery [options]="galleryOptions" [images]="images"></ngx-gallery>
+  </div>
+</div>
