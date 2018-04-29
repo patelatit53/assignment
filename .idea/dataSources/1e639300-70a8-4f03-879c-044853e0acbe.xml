@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="pictures@localhost">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.8">
+    <root id="1">
+      <ServerVersion>9.6.8</ServerVersion>
+    </root>
+    <database id="2" parent="1" name="pictures">
+      <ObjectId>24747</ObjectId>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <database id="3" parent="1" name="postgres">
+      <ObjectId>12401</ObjectId>
+    </database>
+    <database id="4" parent="1" name="auction">
+      <ObjectId>16393</ObjectId>
+    </database>
+    <role id="5" parent="1" name="pg_signal_backend">
+      <ObjectId>4200</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="6" parent="1" name="postgres">
+      <ObjectId>10</ObjectId>
+      <SuperRole>1</SuperRole>
+      <Inherit>1</Inherit>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <Replication>1</Replication>
+      <ConnectionLimit>-1</ConnectionLimit>
+      <BypassRls>1</BypassRls>
+    </role>
+    <schema id="7" parent="2" name="public">
+      <ObjectId>2200</ObjectId>
+      <IntrospectionTimestamp>2018-04-29.11:43:45.218</IntrospectionTimestamp>
+      <IntrospectionStateNumber>713</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="8" parent="2" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+    </schema>
+    <schema id="9" parent="2" name="pg_toast">
+      <ObjectId>99</ObjectId>
+    </schema>
+    <schema id="10" parent="2" name="pg_temp_1">
+      <ObjectId>11848</ObjectId>
+    </schema>
+    <schema id="11" parent="2" name="pg_toast_temp_1">
+      <ObjectId>11849</ObjectId>
+    </schema>
+    <schema id="12" parent="2" name="information_schema">
+      <ObjectId>12113</ObjectId>
+    </schema>
+    <table id="13" parent="7" name="picture">
+      <ObjectId>24748</ObjectId>
+      <StateNumber>713</StateNumber>
+    </table>
+    <column id="14" parent="13" name="id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>713</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="15" parent="13" name="date_created">
+      <Position>2</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>713</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="16" parent="13" name="url">
+      <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <StateNumber>713</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="17" parent="13" name="name">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <StateNumber>713</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="18" parent="13" name="picture_pkey">
+      <ObjectId>24754</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="19" parent="13" name="picture_pkey">
+      <ObjectId>24755</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>picture_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

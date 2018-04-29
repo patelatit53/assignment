@@ -1,5 +1,6 @@
 package com.demo.example.producer.services;
 
+import com.demo.example.producer.enums.PictureStatus;
 import com.demo.example.producer.models.Picture;
 import com.google.gson.Gson;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +19,9 @@ import java.util.List;
 public class ProducerService {
     @Autowired
     private AmqpTemplate amqpTemplate;
+
+    @Autowired
+    private PictureService pictureService;
 
     @Value("${mock.api.url}")
     private String uri;
@@ -40,7 +45,7 @@ public class ProducerService {
     }
 
 
-    @Scheduled(fixedRate = 10000)
+    //@Scheduled(fixedRate = 10000)
     public void searchForChanges() {
         int current = 0;
         List<Picture> pictures = new ArrayList<>();
@@ -48,15 +53,31 @@ public class ProducerService {
             RestTemplate restTemplate = new RestTemplate();
             try {
                 Picture result = restTemplate.getForObject(uri + i, Picture.class);
-                pictures.add(result);
-            } catch (Exception e) {
+                if (this.checkIfExists(result)) {
+                    pictures.add(result);
+                }
+            } catch (HttpClientErrorException e) {
                 current++;
                 if (current == tolerance) {
                     break;
                 }
             }
         }
-        String result = new Gson().toJson(pictures);
-        amqpTemplate.convertAndSend(exchange, routingKey, result);
+        if (!pictures.isEmpty()) {
+            String result = new Gson().toJson(pictures);
+            amqpTemplate.convertAndSend(exchange, routingKey, result);
+        }
+    }
+
+    private boolean checkIfExists(Picture picture) {
+        PictureStatus pictureStatus = this.pictureService.checkIfExists(picture);
+        if (pictureStatus.equals(PictureStatus.INSERT)) {
+            this.pictureService.savePicture(picture);
+            return true;
+        } else if (pictureStatus.equals(PictureStatus.UPDATE)) {
+            this.pictureService.updatePicture(picture);
+            return true;
+        }
+        return false;
     }
 }
